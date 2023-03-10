@@ -1,0 +1,96 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-register">
+  <h2 class="mt-5">Kayıt</h2>
+  <div class="form-group">
+    <input
+      type="text"
+      id="userName"
+      formControlName="userName"
+      class="form-control"
+      placeholder="Kullanıcı Adı"
+      autofocus
+    />
+    <span
+      class="help-block"
+      *ngIf="
+        registerForm.get('userName')?.hasError('required') &&
+        registerForm.get('userName')?.touched
+      "
+    >
+      Kullanıcı adı zorunludur</span
+    >
+  </div>
+  <div class="form-group">
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      class="form-control"
+      placeholder="Şifre"
+      autofocus
+    />
+    <span
+      class="help-block"
+      *ngIf="
+        registerForm.get('password')?.hasError('required') &&
+        registerForm.get('password')?.touched
+      "
+    >
+      Şifre zorunludur</span
+    >
+    <span
+      class="help-block"
+      *ngIf="
+        registerForm.get('password')?.hasError('minlength') &&
+        registerForm.get('password')?.touched
+      "
+    >
+      Şifre en az 4 karakter olmalı</span
+    >
+    <span
+      class="help-block"
+      *ngIf="
+        registerForm.get('password')?.hasError('maxlength') &&
+        registerForm.get('password')?.touched
+      "
+    >
+      Şifre en fazla 8 karakter olmalı</span
+    >
+  </div>
+  <div class="form-group">
+    <input
+      type="password"
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      class="form-control"
+      placeholder="Şifre Tekrar"
+      autofocus
+    />
+    <span
+      class="help-block"
+      *ngIf="
+        registerForm.get('confirmPassword')?.hasError('required') &&
+        registerForm.get('confirmPassword')?.touched
+      "
+    >
+      Şifre tekrar zorunludur</span
+    >
+    <span
+      class="help-block"
+      *ngIf="
+        registerForm.get('confirmPassword')?.hasError('mismatch') &&
+        registerForm.get('confirmPassword')?.touched
+      "
+    >
+      Şifreler uyuşmuyor</span
+    >
+  </div>
+  <button
+    type="submit"
+    class="btn btn-lg btn-primary btn-block"
+    [disabled]="!registerForm.valid"
+  >
+    Kayıt Ol
+  </button>
+  <h6>{{ registerForm.value | json }}</h6>
+  <h6>{{ registerForm.status | json }}</h6>
+</form>
